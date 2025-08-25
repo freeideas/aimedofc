@@ -1,20 +1,5 @@
 <?php
-declare(strict_types=1);
-
-require_once 'infrastructure/lib.php';
-
-// Check if user is already logged in
-$token = $_COOKIE['aiofc_session'] ?? '';
-if ($token) {
-    $userId = getUserIdFromToken($token, true); // Refresh session
-    if ($userId) {
-        // User is already logged in, redirect to main dashboard
-        header('Location: pg_main/');
-        exit;
-    }
-}
-
-// Otherwise show the landing page in an iframe
+require_once 'infrastructure/include.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

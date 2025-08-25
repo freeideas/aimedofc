@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once '../infrastructure/lib.php';
+require_once '../infrastructure/include.php';
 
 // Check if user is already logged in
 $token = $_COOKIE['aiofc_session'] ?? '';

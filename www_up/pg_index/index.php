@@ -1,3 +1,6 @@
+<?php
+require_once '../infrastructure/include.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +10,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    
     <header>
         <div class="container">
             <h1>Medical Office Assistant</h1>

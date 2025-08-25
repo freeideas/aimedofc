@@ -19,8 +19,10 @@ The landing page serves as the entry point for the Medical Office Assistant appl
 - Lists supported document types (lab results, prescriptions, etc.)
 
 ### Visual Design
-- Clean, medical-themed color scheme (purple/pink gradients)
-- Professional typography
+- Text and images displayed on rounded blue glass panels with frosted glass effect
+- Background video (bg.mp4) plays continuously on loop
+- Nearly white semi-transparent glass pane overlays the video for readability
+- Professional typography with good contrast against the glass panels
 - Responsive layout for mobile and desktop
 - Accessible design with proper contrast ratios
 
@@ -38,7 +40,8 @@ The landing page serves as the entry point for the Medical Office Assistant appl
    - If not authenticated → shows login form
 
 ## Files
-- `index.html` - Main landing page structure
-- `style.css` - Landing page styling
+- `index.php` - Main landing page structure (with cache prevention headers)
+- `style.css` - Landing page styling with glass effects
 - `app.js` - Minimal JavaScript for smooth scrolling
+- `bg.mp4` - Background video that plays on loop
 - `test.py` - Visual validation tests

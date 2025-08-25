@@ -1,4 +1,6 @@
 <?php
+require_once '../www_up/infrastructure/include.php';
+
 // Check if requesting a static asset from pg_index
 $requestUri = $_SERVER['REQUEST_URI'] ?? '';
 if (preg_match('/\/(style\.css|app\.js)$/', $requestUri)) {

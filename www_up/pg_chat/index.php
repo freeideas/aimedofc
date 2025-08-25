@@ -1,5 +1,6 @@
 <?php
 require_once '../infrastructure/lib.php';
+require_once '../infrastructure/include.php';
 
 // Check for mock mode
 $mock_mode = isset($_GET['mock']) && $_GET['mock'] === 'true';
