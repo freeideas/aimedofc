@@ -19,6 +19,8 @@ from termcolor import colored
 def find_test_files():
     """Find all test.py files in pg_* directories."""
     test_files = []
+    # Use www symlink - it points to either www_up or www_down
+    # This way tests run against whatever is currently "live"
     www_dir = Path(__file__).parent.parent / 'www'
     
     for pg_dir in www_dir.glob("pg_*/"):
