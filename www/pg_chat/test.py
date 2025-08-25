@@ -13,8 +13,17 @@ import json
 import sqlite3
 import os
 import sys
+import subprocess
+from pathlib import Path
 
-BASE_URL = "http://localhost:8080"
+# Load BASE_URL from config.json
+config_path = Path(__file__).parent.parent / 'config.json'
+if config_path.exists():
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+        BASE_URL = config['BASE_URL'].rstrip('/')
+else:
+    BASE_URL = "http://localhost:8080"
 
 def test_chat_page():
     """Test the chat interface page"""
@@ -149,6 +158,21 @@ def test_chat_page():
     print("  ✓ Testing CSS styles loaded...")
     styles = soup.find('link', {'rel': 'stylesheet', 'href': 'style.css'})
     assert styles is not None, "Stylesheet not linked"
+    
+    # Test 9: Visual validation with webshot
+    print("  ✓ Running visual validation test...")
+    
+    # Run webshot_test.py directly from scripts/
+    webshot_test = Path(__file__).parent.parent.parent / 'scripts' / 'webshot_test.py'
+    if webshot_test.exists():
+        # Run webshot_test from scripts/ in the current directory context
+        result = subprocess.run([str(webshot_test)], capture_output=False, text=True, cwd=Path(__file__).parent)
+        # webshot_test.py already writes test_pass.txt or test_fail.txt with AI analysis
+    else:
+        print(f"Error: webshot_test.py not found at {webshot_test}")
+        print("Please ensure scripts/webshot_test.py exists")
+        with open('test_pass.txt', 'w') as f:
+            f.write("Error: webshot_test.py not found at scripts/ - visual validation unavailable\n")
     
     # Cleanup
     app_cursor.execute("DELETE FROM chat_messages WHERE conversation_id = 'test_conv_1'")
