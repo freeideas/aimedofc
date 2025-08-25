@@ -9,9 +9,8 @@ tmp/
 data/*.db
 data/uploads/
 
-# Credentials and config
+# Credentials (but not config.json - that's tracked)
 data/credentials.json
-www/config.json
 
 # OS files
 .DS_Store
