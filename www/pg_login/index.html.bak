@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Office</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>AI Office</h1>
+            <p class="subtitle">Medical consultation preparation assistant</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group" id="codeGroup" style="display: none;">
+                    <label for="code">Verification Code</label>
+                    <input type="text" id="code" name="code" maxlength="6" pattern="[0-9]{6}" placeholder="Enter 6-digit code">
+                    <p class="help-text">Check your email for the verification code</p>
+                </div>
+                
+                <button type="submit" id="submitBtn">Send Verification Code</button>
+                
+                <div id="message" class="message"></div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

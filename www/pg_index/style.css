@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: #fff;
+    border-bottom: 1px solid #e1e4e8;
+    padding: 20px 0;
+}
+
+header h1 {
+    color: #0366d6;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    color: #586069;
+    font-size: 1.1rem;
+}
+
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.lead {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #fff;
+    color: #667eea;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.features {
+    padding: 60px 0;
+    background: white;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #24292e;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f6f8fa;
+}
+
+.feature h3 {
+    color: #0366d6;
+    margin-bottom: 10px;
+}
+
+.how-it-works {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #24292e;
+}
+
+.steps {
+    max-width: 700px;
+    margin: 0 auto;
+    counter-reset: step-counter;
+}
+
+.steps li {
+    position: relative;
+    padding: 20px 20px 20px 60px;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    counter-increment: step-counter;
+}
+
+.steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.steps strong {
+    color: #24292e;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.supported-docs {
+    padding: 60px 0;
+    background: white;
+}
+
+.supported-docs h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #24292e;
+}
+
+.doc-types {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.doc-type {
+    background: #e1e4e8;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #586069;
+}
+
+.cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.cta h2 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.cta p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+footer {
+    background: #24292e;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: #959da5;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}

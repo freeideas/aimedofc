@@ -1,0 +1,48 @@
+pg_main Test Results
+==================================================
+✓ Page loads - Status: 200
+✓ Has welcome message
+✓ Has auth button
+✓ Has action cards
+✓ Has chat link
+✓ Has records link
+✓ Has profile link
+✓ Has recent activity section
+✓ Has appointment section
+✓ Has appointment placeholder date
+✓ Has appointment placeholder doctor
+✓ API requires authentication - Status: 401
+✓ Logout API endpoint exists - Status: 200
+✓ File exists: index.html
+✓ File exists: style.css
+✓ File exists: app.js
+✓ File exists: api_dashboard.php
+✓ File exists: api_logout.php
+✓ File exists: README.md
+
+Visual Test Output:
+
+=== Visual Test for pg_main ===
+URL: https://app.ironmedia.com/aiofc/pg_main/
+Capturing screenshot...
+✓ Screenshot captured as webshot.png
+Validating with Claude...
+
+============================================================
+Claude Validation Result:
+VERDICT: PASS
+
+ANALYSIS:
+- The page layout perfectly matches the README specification, displaying the header with "Medical Office Assistant" title, "Welcome, Patient" message (as expected for unauthenticated/placeholder state), and a "Login" button in the top-right corner
+- All three main navigation cards are properly rendered in the expected order: "Chat with AI", "View Medical Records", and "My Profile", each with appropriate icons and descriptive text matching the README requirements
+- The appointment section displays with actual appointment data (January 1, 2000 appointment with Dr. Smith for routine check-up) rather than showing "(none)" placeholder, indicating the API is returning data successfully
+- The Recent Activity section shows three chat conversations with timestamps, demonstrating proper rendering of recent chat history as described in the documentation
+- The Quick Actions section at the bottom contains the required "Chat with AI Assistant" and "View All Records" buttons, completing all the essential UI elements specified in the README
+============================================================
+
+✓ Visual test PASSED for pg_main
+
+✅ Test passed - see test_pass.txt for details
+
+
+All tests passed successfully!

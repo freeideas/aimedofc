@@ -1,0 +1,40 @@
+# Temporary files
+tmp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Database files (sensitive data)
+data/*.db
+data/uploads/
+
+# Credentials and config
+data/credentials.json
+www/config.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.env
+
+# PHP
+vendor/
+composer.lock
+
+# Logs
+*.log
+logs/

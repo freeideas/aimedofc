@@ -1,0 +1,19 @@
+please read all the .md files in the root of this project, then look at which files exist under the ./doc directory (but don't read all of them; only the ones you need), read all the .md files under the ./doc directory, then:
+1) delete ./report.txt
+2) write a report on any:
+   -- disagreements or discrepencies or confusion
+   -- unnecessary overlap
+   -- more detail than competant professionals would need
+   -- gaps in understanding: assuming the developers and testers already know HOW to do their jobs; do they know WHAT to do?
+   Write the report into ./report.txt
+
+
+
+please read all the .md files in the root of this project, then look at which files exist under the ./doc directory (but don't read all of them; only the ones you need), read all the .md files under the ./doc directory, then:
+1) Let's implement the pg_login page, including all the supporting files
+2) Run that page's test.py, and fix any issues
+2) write ./report.txt which explains any challenges you faced and what updates to the documentation and/or architecture will make this easier for future developers who will re-implement this from scratch
+
+
+
+after implementing this pg_* mini-app, do you have any recommendations for the documentation so that a developer in the future who re-implements this will have less trouble with it? Write these recommendations into ./report.txt
