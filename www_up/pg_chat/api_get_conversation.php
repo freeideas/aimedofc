@@ -33,11 +33,12 @@ try {
         exit;
     }
     
-    // Get messages
+    // Get messages (excluding deleted)
     $stmt = $db->prepare("
         SELECT message_id, role, message, timestamp 
         FROM chat_messages 
         WHERE conversation_id = ?
+        AND (deleted = 0 OR deleted IS NULL)
         ORDER BY timestamp ASC
     ");
     $stmt->execute([$conversation_id]);

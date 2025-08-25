@@ -71,14 +71,30 @@ def test_chat_page():
         ('test_rec_1', ?, 'Blood Work Results', 'lab_results', '2024-01-15', 
          'Hemoglobin: 14.5 g/dL (Normal)\nWhite Blood Cells: 7,500/μL (Normal)', CURRENT_TIMESTAMP)
     """, (test_user_id,))
+    
+    # Add test appointments with doctor's notes
+    app_cursor.execute("""
+        INSERT OR REPLACE INTO appointments 
+        (appointment_id, user_id, doctor_name, appointment_date, appointment_time, 
+         appointment_type, location, notes, status, created_at)
+        VALUES 
+        ('test_appt_1', ?, 'Dr. Smith', '2024-01-10', '10:00 AM', 
+         'routine', 'Main Office', 
+         'Patient appears healthy. Blood work ordered. Continue current medications.', 
+         'completed', CURRENT_TIMESTAMP),
+        ('test_appt_2', ?, 'Dr. Smith', '2024-02-15', '2:00 PM',
+         'follow-up', 'Main Office',
+         'Blood work results reviewed - all normal. Patient doing well.',
+         'completed', CURRENT_TIMESTAMP)
+    """, (test_user_id, test_user_id))
     app_conn.commit()
     
     # Set session cookie to the token
     session.cookies.set('aiofc_session', test_token)
     
-    # Test 1: Load chat page
-    print("  ✓ Testing chat page loads...")
-    response = session.get(f"{BASE_URL}/pg_chat/")
+    # Test 1: Load chat page with mock mode for visual testing
+    print("  ✓ Testing chat page loads with mock mode...")
+    response = session.get(f"{BASE_URL}/pg_chat/?mock=true")
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -108,22 +124,55 @@ def test_chat_page():
     message_input = soup.find('input', id='messageInput')
     assert message_input is not None, "Message input not found"
     
-    # Test 6: Test API chat endpoint
-    print("  ✓ Testing chat API endpoint...")
+    # Test 6: Test API chat endpoint with actual LLM query
+    print("  ✓ Testing chat API endpoint with LLM...")
+    from datetime import datetime
+    
+    # Simulate browser sending local datetime and timezone
+    local_dt = datetime.now().strftime('%m/%d/%Y, %H:%M:%S')
+    timezone = 'America/New_York'
+    
     chat_response = session.post(f"{BASE_URL}/pg_chat/api_chat.php",
-                                 json={'message': 'What are my hemoglobin levels?'},
+                                 json={
+                                     'message': 'What are my hemoglobin levels based on my medical records?',
+                                     'local_datetime': local_dt,
+                                     'timezone': timezone
+                                 },
                                  headers={'Content-Type': 'application/json'})
     
-    # Note: API will fail without valid Gemini credentials, but we can check structure
     if chat_response.status_code == 200:
         try:
             data = chat_response.json()
             assert 'success' in data, "API response missing success field"
+            
             if data.get('success'):
                 assert 'response' in data, "API response missing response field"
                 assert 'conversation_id' in data, "API response missing conversation_id"
+                
+                # Test that LLM actually responded with relevant information
+                response_text = data.get('response', '').lower()
+                print(f"    LLM Response preview: {response_text[:100]}...")
+                
+                # Check if response mentions hemoglobin (from the test medical record)
+                assert any(word in response_text for word in ['hemoglobin', '14.5', 'normal', 'blood']), \
+                    "LLM response doesn't seem to reference the medical records"
+                
+                # Note: LLM should ideally include medical disclaimer, but we'll just log if missing
+                if not any(phrase in response_text for phrase in ['not a doctor', 'medical advice', 'professional', 'healthcare provider', 'consult']):
+                    print("    ⚠️  Note: LLM response may be missing medical disclaimer")
+                
+                print("    ✓ LLM successfully processed medical context and responded appropriately")
+            else:
+                error_msg = data.get('error', 'Unknown error')
+                print(f"    ⚠️  Chat API returned error: {error_msg}")
+                if 'api key' in error_msg.lower():
+                    print("    (Gemini API key not configured - skipping LLM test)")
+                else:
+                    raise AssertionError(f"Chat API failed: {error_msg}")
         except json.JSONDecodeError:
-            print("    (API returned non-JSON response, likely credential issue)")
+            print("    ⚠️  API returned non-JSON response, likely configuration issue")
+    else:
+        print(f"    ⚠️  Chat API returned status {chat_response.status_code}")
     
     # Test 7: Test conversation retrieval
     print("  ✓ Testing conversation retrieval...")
@@ -159,14 +208,15 @@ def test_chat_page():
     styles = soup.find('link', {'rel': 'stylesheet', 'href': 'style.css'})
     assert styles is not None, "Stylesheet not linked"
     
-    # Test 9: Visual validation with webshot
-    print("  ✓ Running visual validation test...")
+    # Test 9: Visual validation with webshot (uses mock messages from ?mock=true)
+    print("  ✓ Running visual validation test with mock messages...")
     
     # Run webshot_test.py directly from scripts/
     webshot_test = Path(__file__).parent.parent.parent / 'scripts' / 'webshot_test.py'
     if webshot_test.exists():
         # Run webshot_test from scripts/ in the current directory context
-        result = subprocess.run([str(webshot_test)], capture_output=False, text=True, cwd=Path(__file__).parent)
+        # It will capture the page with ?mock=true showing sample messages
+        result = subprocess.run([str(webshot_test), '--url', '/pg_chat/?mock=true'], capture_output=False, text=True, cwd=Path(__file__).parent)
         # webshot_test.py already writes test_pass.txt or test_fail.txt with AI analysis
     else:
         print(f"Error: webshot_test.py not found at {webshot_test}")
@@ -177,6 +227,7 @@ def test_chat_page():
     # Cleanup
     app_cursor.execute("DELETE FROM chat_messages WHERE conversation_id = 'test_conv_1'")
     app_cursor.execute("DELETE FROM conversations WHERE user_id = ?", (test_user_id,))
+    app_cursor.execute("DELETE FROM appointments WHERE user_id = ?", (test_user_id,))
     app_cursor.execute("DELETE FROM medical_records WHERE user_id = ?", (test_user_id,))
     app_cursor.execute("DELETE FROM patients WHERE user_id = ?", (test_user_id,))
     app_conn.commit()

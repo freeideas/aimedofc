@@ -20,6 +20,9 @@ The chat interface provides patients with AI-powered medical consultation assist
 - **Real-time Messaging**: Patient messages appear on the right, AI responses on the left
 - **Medical Context**: AI has access to all patient medical records during conversation
 - **Conversation History**: AI maintains context within each conversation thread
+- **Clear All Button**: Located in chat header, clears all messages in current conversation (soft delete)
+- **Delete Message Button**: Small X button in upper-right corner of each message on hover (soft delete)
+- **Soft Delete**: Messages are never permanently deleted, only marked with `deleted = 1` flag in database
 
 ## Technical Implementation
 
@@ -61,6 +64,10 @@ Uses the updated schema with descriptive column names:
 - User can only access their own conversations
 - SQL injection prevention via prepared statements
 - XSS prevention via `htmlspecialchars()` for output
+
+## Mock Mode
+
+For testing and development, the chat interface supports a mock mode accessed via `?mock=true` query parameter. This displays sample chat messages without requiring authentication or database access, useful for visual testing.
 
 ## Dependencies
 

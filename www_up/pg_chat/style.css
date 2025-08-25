@@ -114,6 +114,10 @@ main {
     border-bottom: 1px solid #e9ecef;
     cursor: pointer;
     transition: background 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .conversation-item:hover {
@@ -122,6 +126,40 @@ main {
 
 .conversation-item.active {
     background: #667eea;
+    color: white;
+}
+
+.conversation-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.conversation-delete {
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: white;
+    border: 1px solid #dc3545;
+    border-radius: 50%;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s, background 0.2s;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.conversation-item:hover .conversation-delete {
+    opacity: 1;
+}
+
+.conversation-delete:hover {
+    background: #dc3545;
     color: white;
 }
 
@@ -148,11 +186,29 @@ main {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #dee2e6;
     background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .chat-header h2 {
     font-size: 1.2rem;
     color: #333;
+}
+
+.btn-clear-chat {
+    padding: 0.4rem 0.8rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-clear-chat:hover {
+    background: #c82333;
 }
 
 .chat-messages {
@@ -165,6 +221,7 @@ main {
 .message {
     margin-bottom: 1.5rem;
     display: flex;
+    position: relative;
 }
 
 .message.patient {
@@ -175,11 +232,51 @@ main {
     justify-content: flex-start;
 }
 
-.message-content {
+.message-wrapper {
     max-width: 70%;
+    position: relative;
+}
+
+.message.patient .message-wrapper {
+    flex-direction: row-reverse;
+}
+
+.message-content {
     padding: 0.75rem 1rem;
     border-radius: 10px;
     line-height: 1.5;
+}
+
+.message-delete {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: white;
+    border: 1px solid #dc3545;
+    border-radius: 50%;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s, transform 0.2s, background 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message:hover .message-delete {
+    opacity: 1;
+}
+
+.message-delete:hover {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.1);
 }
 
 .message.patient .message-content {
@@ -188,7 +285,7 @@ main {
 }
 
 .message.assistant .message-content {
-    background: white;
+    background: #e8f5e9;
     color: #333;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }

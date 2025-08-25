@@ -65,70 +65,11 @@ Located in `pg_chat/`:
 
 ### Database Schema
 
-#### Application Database (aioffice.db)
-Application-specific data, references auth.db users:
+The application uses two SQLite databases:
+- **auth.db** - Authentication database (see [AUTH.md](AUTH.md))
+- **aioffice.db** - Application database
 
-```sql
--- Patient profiles (extends auth users)
-CREATE TABLE patients (
-    user_id TEXT PRIMARY KEY,  -- References auth.db users.id
-    full_name TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
--- Medical records (provided by doctor's office, not uploaded by patients)
-CREATE TABLE medical_records (
-    record_id TEXT PRIMARY KEY,  -- Generated unique ID
-    user_id TEXT NOT NULL,  -- References auth.db users.id
-    record_title TEXT,  -- Human-readable title (e.g., 'Hormone Report', 'Blood Work Results')
-    record_type TEXT,  -- e.g., 'lab_results', 'prescriptions', 'visit_notes'
-    record_date DATE,
-    content TEXT NOT NULL,  -- Markdown-formatted medical information
-    source_filename TEXT,  -- Original PDF filename (can be NULL)
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES patients(user_id)
-);
-
--- Conversations (each patient can have multiple conversations)
-CREATE TABLE conversations (
-    conversation_id TEXT PRIMARY KEY,  -- Generated unique ID
-    user_id TEXT NOT NULL,  -- References auth.db users.id
-    title TEXT NOT NULL,  -- Conversation title (e.g., 'Questions about hormone therapy', 'Lab results discussion')
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES patients(user_id)
-);
-
--- Chat messages within conversations
-CREATE TABLE chat_messages (
-    message_id TEXT PRIMARY KEY,  -- Generated unique ID
-    conversation_id TEXT NOT NULL,  -- References conversations.conversation_id
-    role TEXT CHECK(role IN ('patient', 'assistant')),
-    message TEXT NOT NULL,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (conversation_id) REFERENCES conversations(conversation_id)
-);
-
--- Appointments (past and future)
-CREATE TABLE appointments (
-    appointment_id TEXT PRIMARY KEY,  -- Generated unique ID
-    user_id TEXT NOT NULL,  -- References auth.db users.id
-    doctor_name TEXT NOT NULL,
-    appointment_date DATE NOT NULL,  -- Date in YYYY-MM-DD format
-    appointment_time TIME,  -- Local time for display (legacy)
-    appointment_datetime_utc DATETIME,  -- UTC datetime for accurate scheduling
-    appointment_type TEXT,  -- e.g., 'routine', 'follow-up', 'specialist', 'lab_work'
-    location TEXT,
-    notes TEXT,
-    status TEXT DEFAULT 'scheduled',  -- 'scheduled', 'completed', 'cancelled', 'no-show'
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES patients(user_id)
-);
-```
-
-For authentication database schema and cross-database access patterns, see [AUTH.md](AUTH.md).
+For complete database schema documentation including table structures, relationships, and soft delete implementation, see [SCHEMA.md](SCHEMA.md).
 
 ## Development Workflow
 
