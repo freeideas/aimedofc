@@ -58,6 +58,15 @@ Uses the `medical_records` table from `aioffice.db`:
 4. PDF loads in the right panel via iframe
 5. Browser's native PDF viewer handles display
 
+## Visual Design
+
+The medical records viewer uses the shared glassmorphic design system from infrastructure/glassmorphic.css:
+- Dark blue frosted glass panels (rgba(30, 64, 175, ...)) with white text
+- Purple gradient buttons for primary actions (Back to Dashboard)
+- Backdrop blur effects for the header and sidebar
+- Responsive design with mobile-first approach
+- Consistent styling with other pg_* pages in the application
+
 ## Technical Details
 
 - Uses iframe with `src` pointing to `get_pdf.php?id=<record_id>`

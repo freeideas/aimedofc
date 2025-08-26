@@ -7,6 +7,7 @@ require_once '../infrastructure/include.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Office Assistant</title>
+    <link rel="stylesheet" href="../infrastructure/glassmorphic.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

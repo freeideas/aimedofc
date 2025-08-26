@@ -129,11 +129,13 @@ Note:
 
 ## Visual Design
 
-- Clean, card-based layout
-- Consistent with application's purple/pink gradient theme
-- Clear visual hierarchy with primary actions prominent
-- Responsive design for mobile and desktop
-- Smooth hover effects on interactive elements
+- Utilizes the shared glassmorphic design system from infrastructure/glassmorphic.css
+- Features dark blue frosted glass panels with white text throughout
+- Purple gradient buttons for primary actions (Get Started, Chat, etc.)
+- Backdrop blur effects create depth and visual hierarchy
+- Clean card-based layout with rounded corners and soft shadows
+- Responsive design optimized for both mobile and desktop viewing
+- Smooth hover animations on all interactive elements
 
 ## Security
 

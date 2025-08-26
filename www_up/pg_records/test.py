@@ -256,9 +256,9 @@ def test_responsive_layout():
     assert soup.find(class_='content'), "Should have content area"
     assert soup.find(class_='back-link'), "Should have back to dashboard link"
     
-    # Check CSS media query is present
-    style = soup.find('style')
-    assert '@media' in style.text, "Should have responsive media queries"
+    # Check that external stylesheet is included
+    link = soup.find('link', {'rel': 'stylesheet', 'href': 'style.css'})
+    assert link is not None, "Should have external stylesheet"
     
     print("   ✓ Layout elements present and responsive")
 

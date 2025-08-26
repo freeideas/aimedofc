@@ -69,6 +69,15 @@ Uses the updated schema with descriptive column names:
 
 For testing and development, the chat interface supports a mock mode accessed via `?mock=true` query parameter. This displays sample chat messages without requiring authentication or database access, useful for visual testing.
 
+## Visual Design
+
+The chat interface uses the shared glassmorphic design system from infrastructure/glassmorphic.css:
+- Dark blue frosted glass panels (rgba(30, 64, 175, ...)) with white text
+- Purple gradient buttons for primary actions (Send, New Chat)
+- Backdrop blur effects and glassmorphic containers
+- Responsive design with mobile-first approach
+- Consistent styling with other pg_* pages in the application
+
 ## Dependencies
 
 - PHP 8.1+ with PDO SQLite

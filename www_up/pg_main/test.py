@@ -88,7 +88,7 @@ except Exception as e:
     test("Logout API endpoint exists", False, str(e))
 
 # Test 5: Check for required files
-required_files = ['index.html', 'style.css', 'app.js', 'api_dashboard.php', 'api_logout.php', 'README.md']
+required_files = ['index.php', 'style.css', 'app.js', 'api_dashboard.php', 'api_logout.php', 'README.md']
 for file in required_files:
     file_path = test_dir / file
     test(f"File exists: {file}", file_path.exists())

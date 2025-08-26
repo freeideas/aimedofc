@@ -1,18 +1,12 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* pg_index specific styles - uses glassmorphic.css for base styles */
 
+/* Override body background for video */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    line-height: 1.6;
-    color: white;
+    background: transparent;
     position: relative;
-    min-height: 100vh;
 }
 
-/* Video Background */
+/* Video Background - Specific to landing page */
 .video-background {
     position: fixed;
     top: 0;
@@ -29,7 +23,7 @@ body {
     object-fit: cover;
 }
 
-/* Semi-transparent white overlay */
+/* Semi-transparent white overlay for video */
 .video-overlay {
     position: fixed;
     top: 0;
@@ -40,83 +34,7 @@ body {
     z-index: -1;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Darker blue glassmorphic panels */
-header {
-    background: rgba(30, 64, 175, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(30, 64, 175, 0.3);
-    border-radius: 20px;
-    padding: 30px 0;
-    margin: 20px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-header h1 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.tagline {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
-    text-align: center;
-}
-
-.hero {
-    background: rgba(30, 64, 175, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(30, 64, 175, 0.3);
-    border-radius: 20px;
-    padding: 60px 40px;
-    margin: 20px;
-    text-align: center;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: white;
-}
-
-.lead {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    color: rgba(255, 255, 255, 0.95);
-}
-
-/* Purple buttons */
-.btn-primary {
-    display: inline-block;
-    background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
-    color: white;
-    padding: 14px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px 0 rgba(147, 51, 234, 0.4);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px 0 rgba(147, 51, 234, 0.5);
-    background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
-}
-
+/* Landing Page Specific Sections */
 .features {
     padding: 40px 20px;
 }
@@ -124,8 +42,6 @@ header h1 {
 .features h2 {
     text-align: center;
     margin-bottom: 40px;
-    font-size: 2rem;
-    color: white;
 }
 
 .feature-grid {
@@ -150,17 +66,7 @@ header h1 {
     box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
 }
 
-.feature h3 {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-}
-
-.feature p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
-}
-
+/* How it Works Steps */
 .how-it-works {
     padding: 40px 20px;
 }
@@ -168,8 +74,6 @@ header h1 {
 .how-it-works h2 {
     text-align: center;
     margin-bottom: 40px;
-    font-size: 2rem;
-    color: white;
 }
 
 .steps {
@@ -221,6 +125,7 @@ header h1 {
     line-height: 1.6;
 }
 
+/* Supported Documents Section */
 .supported-docs {
     padding: 40px 20px;
 }
@@ -228,8 +133,6 @@ header h1 {
 .supported-docs h2 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2rem;
-    color: white;
 }
 
 .supported-docs .container {
@@ -265,6 +168,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* CTA Section */
 .cta {
     background: rgba(30, 64, 175, 0.65);
     backdrop-filter: blur(12px);
@@ -279,14 +183,35 @@ header h1 {
 
 .cta h2 {
     margin-bottom: 15px;
-    font-size: 2rem;
-    color: white;
 }
 
 .cta p {
     margin-bottom: 25px;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Use glass-header and glass-hero classes from glassmorphic.css */
+header {
+    background: rgba(30, 64, 175, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(30, 64, 175, 0.3);
+    border-radius: 20px;
+    padding: 30px 0;
+    margin: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.hero {
+    background: rgba(30, 64, 175, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.3);
+    border-radius: 20px;
+    padding: 60px 40px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 footer {
@@ -300,25 +225,8 @@ footer {
     border-radius: 20px 20px 0 0;
 }
 
-.disclaimer {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 10px;
-}
-
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.8rem;
-    }
-    
-    .lead {
-        font-size: 1rem;
-    }
-    
     .feature-grid {
         grid-template-columns: 1fr;
     }

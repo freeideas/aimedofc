@@ -76,6 +76,16 @@ The login system creates and manages three tables in `auth.db`:
 - Success/error messages with appropriate colors
 - Smooth transitions and hover effects
 
+## Visual Design
+
+- Leverages the shared glassmorphic design framework from infrastructure/glassmorphic.css
+- Features elegant dark blue glass panels with frosted backdrop effects
+- Clean white text for optimal readability against glass backgrounds
+- Purple gradient buttons for primary actions (Send Code, Verify & Login)
+- Form inputs styled with transparent glass effects and subtle borders
+- Responsive layout that maintains visual hierarchy on all screen sizes
+- Smooth transitions and hover effects for enhanced user experience
+
 ## Testing
 
 Run tests with:
